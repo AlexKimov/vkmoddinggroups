@@ -13,10 +13,12 @@ module.exports = function(items) {
         array.forEach( function( o )
         {
             let group = f(o)[0];
-            if (!isLetter(group))
-                group = '-';
-            groups[group] = groups[group] || [];
-            groups[group].push( o );
+            if (group !== undefined) {
+                if (!isLetter(group))
+                    group = '-';
+                groups[group] = groups[group] || [];
+                groups[group].push(o);
+            }
         });
 
         return Object.keys(groups).map( function( group )
