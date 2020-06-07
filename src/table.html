@@ -1,0 +1,30 @@
+---
+layout: table.njk
+permalink: table.html
+---
+
+{% include "header.html" %}
+
+<main>
+    <h2> {{ metadata.page.index.table }} </h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Название группы</th>
+                <th>Игра/Серия</th>
+                <th>Участники</th>
+                <th>Год</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%- for group in groups.vk.group | sort(true, false, "name") -%}
+        <tr>
+            <td><a href="{{ group.link }}" title="{{ group.name }}" target="_blank">{{ group.name }}</a></td>
+            <td>{% if group.games|length %} {{ group.games }} {% endif %}</td>
+            <td>{% if group.members|length %} {{ group.members }} {% endif %}</td>
+            <td>{% if group.year|length %} {{ group.year }} {% endif %}</td>
+        </tr>
+        {%- endfor -%}
+        </tbody>
+    </table>
+</main>

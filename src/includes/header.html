@@ -1,5 +1,10 @@
 <h1>{{ metadata.page.index.header }}</h1>
 
 <section>
-     <nav>вид <a href="/index.html">список</a> | <a href="/games.html">по играм</a> | <a href="/groups.html">по названию групп</a></nav>
+     <nav>вид
+          <a href="/index.html" title="{{ metadata.page.header.list }}">{{ metadata.page.header.list }}</a> |
+          <a href="/tables.html" title="{{ metadata.page.header.table }}">{{ metadata.page.header.table }}</a> |
+          <a href="/games.html" title="{{ metadata.page.header.by_game }}">{{ metadata.page.header.by_game }}</a> |
+          <a href="/groups.html" title="{{ metadata.page.header.by_group }}">{{ metadata.page.header.by_group }}</a>
+     </nav>
 </section>
