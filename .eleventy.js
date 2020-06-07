@@ -1,5 +1,6 @@
 const toml = require("toml");
 const htmlmin = require("html-minifier");
+const cleanCSS = require("clean-css");
 
 module.exports = eleventyConfig => {
     eleventyConfig.addDataExtension("toml", contents => toml.parse(contents));
@@ -16,6 +17,18 @@ module.exports = eleventyConfig => {
         return content;
     });
 
+    eleventyConfig.addNunjucksFilter("groupByGameName",
+        require("./src/filters/group.js")
+    );
+
+    eleventyConfig.addNunjucksFilter("sortByGroupName",
+        require("./src/filters/sort.js")
+    );
+
+    eleventyConfig.addFilter("cssmin", function(code) {
+        return new cleanCSS({}).minify(code).styles;
+    });
+
     return {
         templateFormats: ["md",  "njk",  "html", "liquid"],
             markdownTemplateEngine: "liquid",
@@ -23,7 +36,7 @@ module.exports = eleventyConfig => {
             dataTemplateEngine: "njk",
             dir: {
             input: ".",
-                includes: "_includes",
+                includes: "includes",
                 data: "data",
                 input: "src",
                 output: "_site",
