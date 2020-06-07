@@ -1,17 +1,20 @@
 ---
-layout: index.njk
+layout: games.njk
+permalink: games.html
 ---
 
 {% include "header.html" %}
 
-<main>
+<section>
+    {%- for items in groups.vk.group | groupByGameName -%}
+    <h2>{{ items.game_name }}</h2>
     <ul>
-        {%- for group in groups.vk.group |sort(true, false, "name") -%}
+        {%- for group in items -%}
         <li>
             <a href="{{ group.link }}" title="{{ group.name }}" target="_blank">{{ group.name }}</a> <br>
             {% include "group_data.njk" %}
         </li>
         {%- endfor -%}
     </ul>
-
-</main>
+    {%- endfor -%}
+</section>
