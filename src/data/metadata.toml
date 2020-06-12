@@ -10,8 +10,11 @@
     header="Сообщества по созданию игровых модификаций в социальной сети вКонтакте"
     group_list="Список групп"
     table="Список групп (таблица)"
+  [page.tiles]
+    main_header="Список групп (плитка)"
   [page.header]
-    list="список"
-    by_game="по названию игры"
-    by_group="по названию группы "
-    table="таблица"
+    list=["список", "tiles.html"]
+    table=["таблица", "table.html"]
+    tile=["плитки", "tiles.html"]
+    by_game=["по названию игры", "games.html"]
+    by_group=["по названию группы ", "groups.html"]

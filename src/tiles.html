@@ -1,0 +1,20 @@
+---
+layout: index.njk
+permalink: tiles.html
+---
+
+{% include "header.html" %}
+
+<main>
+    <h2> {{ metadata.page.tiles.main_header }} </h2>
+    {%- for group in groups.vk.group | sort(true, false, "name") -%}
+        <div class="tile">
+            <p>
+                <a href="{{ group.link }}" title="{{ group.name }}" target="_blank">{{ group.name }}</a> <br>
+                {% if group.members|length %} <span> {{ metadata.page.index.users }}:</span> {{ group.members }} <br>{% endif %}
+                {% if group.year|length %} <span>{{ metadata.page.index.year }}:</span> {{ group.year }} <br>{% endif %}
+                {% if group.games|length %} <span>{{ metadata.page.index.game_series }}:</span> {{ group.games }} {% endif %}
+            </p>
+        </div>
+    {%- endfor -%}
+</main>
