@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/AlexKimov/vkmoddinggroups#readme",
   "dependencies": {
+    "fast-glob": "^3.2.2",
     "toml": "^3.0.0"
   },
   "devDependencies": {

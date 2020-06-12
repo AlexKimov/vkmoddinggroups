@@ -6,7 +6,7 @@ permalink: games.html
 {% include "header.html" %}
 
 <section>
-    {%- for items in groups.vk.group | groupByGameName -%}
+    {%- for items in groups.vk.group | groupByGame -%}
     <h2>{{ items.game_name }}</h2>
     <ul>
         {%- for group in items -%}

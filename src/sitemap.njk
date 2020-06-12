@@ -8,7 +8,7 @@ eleventyExcludeFromCollections: true
   {% set mappedUrl %}{{ metadata.url}}{{ page.url | url }}{% endset %}
   <url>
     <loc>{{ mappedUrl }}</loc>
-    <lastmod>{{ page.date | htmlDateString }}</lastmod>
+    <lastmod>{{ page.date | formatDate }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

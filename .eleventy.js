@@ -1,37 +1,25 @@
+const glob = require('fast-glob');
+const path = require('path');
+
 const toml = require("toml");
-const htmlmin = require("html-minifier");
-const cleanCSS = require("clean-css");
 
 module.exports = eleventyConfig => {
+    const paths = {
+        filters: joinPath("src/filters/*.js"),
+        transforms: joinPath("src/transforms/*.js"),
+    };
+
+    const transforms = glob.sync(paths.transforms);
+    transforms.forEach(transform => {
+        eleventyConfig.addTransform(resolveNameFromPath(transform), require(transform));
+    });
+
+    const filters = glob.sync(paths.filters);
+    filters.forEach(filter => {
+        eleventyConfig.addFilter(resolveNameFromPath(filter), require(filter));
+    });
+
     eleventyConfig.addDataExtension("toml", contents => toml.parse(contents));
-
-    eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
-        if( outputPath.endsWith(".html") ) {
-            let minified = htmlmin.minify(content, {
-                useShortDoctype: true,
-                removeComments: true,
-                collapseWhitespace: true
-            });
-            return minified;
-        }
-        return content;
-    });
-
-    eleventyConfig.addFilter('htmlDateString',
-        require("./src/filters/date.js")
-    );
-
-    eleventyConfig.addNunjucksFilter("groupByGameName",
-        require("./src/filters/group.js")
-    );
-
-    eleventyConfig.addNunjucksFilter("sortByGroupName",
-        require("./src/filters/sort.js")
-    );
-
-    eleventyConfig.addFilter("cssmin", function(code) {
-        return new cleanCSS({}).minify(code).styles;
-    });
 
     return {
         templateFormats: ["md",  "njk",  "html", "liquid"],
@@ -48,3 +36,11 @@ module.exports = eleventyConfig => {
         }
     };
 };
+
+function resolveNameFromPath(filePath) {
+    return path.parse(filePath).name;
+}
+
+function joinPath(filePath) {
+    return path.join(process.cwd(), filePath).replace(/\\/g, '/')
+}

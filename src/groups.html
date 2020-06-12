@@ -6,7 +6,7 @@ permalink: groups.html
 {% include "header.html" %}
 
 <section>
-    {%- for items in groups.vk.group | sortByGroupName -%}
+    {%- for items in groups.vk.group | groupByName -%}
     <h2>{{ items.letter }}</h2>
     <ul>
         {%- for group in items -%}
