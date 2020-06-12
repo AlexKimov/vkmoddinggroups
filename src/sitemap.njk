@@ -7,7 +7,7 @@ eleventyExcludeFromCollections: true
 {%- for page in collections.all %}
   {% set mappedUrl %}{{ metadata.url}}{{ page.url | url }}{% endset %}
   <url>
-    <loc>{{ mappedUrl }}</loc>
+    <loc>https://vkgamemodding.ru{{ mappedUrl }}</loc>
     <lastmod>{{ page.date | formatDate }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
