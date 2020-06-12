@@ -17,6 +17,10 @@ module.exports = eleventyConfig => {
         return content;
     });
 
+    eleventyConfig.addFilter('htmlDateString',
+        require("./src/filters/date.js")
+    );
+
     eleventyConfig.addNunjucksFilter("groupByGameName",
         require("./src/filters/group.js")
     );
